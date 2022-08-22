@@ -1,0 +1,9 @@
+{% if diary_list %}
+    <ul>
+    {% for diary in diary_list %}
+        <li><a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.content }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>준비중 입니다.</p>
+{% endif %}

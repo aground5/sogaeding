@@ -1,0 +1,19 @@
+<h1>{{ diary.state }}</h1>
+<div>
+    {{ diary.content }}
+</div>
+<h5>키워드: {{ diary.keyword }}</h5>
+<div>
+    <ul>
+    {% for image in diary.image_set.all %}
+        <img src="{{ image.url }}">
+    {% endfor %}
+    </ul>
+</div>
+<div>
+	<ul>
+		{% for news in diary.news_set.all %}
+			<li><a href="{{ news.url }}">{{ news.title }}</a></li>
+		{% endfor %}
+	</ul>
+</div>
