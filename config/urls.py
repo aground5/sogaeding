@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from earth_diary import views as earth_dary_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('earth_diary.urls')),
     path('common/', include('common.urls')),
+    path('', earth_dary_views.index, name='index'),
 ]
