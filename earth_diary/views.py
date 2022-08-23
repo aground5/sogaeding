@@ -16,3 +16,6 @@ def detail(request, diary_id) :
         'diary': diary,
     }
     return render(request, 'earth_diary/diary_detail.html', context)
+
+def test(request) :
+    return render(request, 'test.html', {})
