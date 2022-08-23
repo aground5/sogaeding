@@ -1,3 +1,8 @@
-django
+Django
 django-csp
 django-environ
+gunicorn
+sqlparse
+asgiref
+mysqlclient
+django-mysql
