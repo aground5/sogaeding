@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -115,11 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'ko-kr'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -140,3 +138,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
+
+# CSP 설정
+CSP_DEFAULT_SRC = ("'self'")
+CSP_IMG_SRC = ("'self' 'unsafe-inline' * data:")
+CSP_FONT_SRC = ("'self' fonts.gstatic.com ka-f.fontawesome.com")
+CSP_STYLE_SRC = ("'self' 'unsafe-inline' fonts.googleapis.com")
+CSP_SCRIPT_SRC_ELEM = ("'self'")
+CSP_CONNECT_SRC = ("*")
+CSP_INCLUDE_NONCE_IN = [
+	"script-src-elem",
+]
+
+# HSTS
+SECURE_HSTS_SECONDS = 31536000  # 365 * 24 * 60 * 60
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
