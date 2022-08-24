@@ -1,52 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
-      <span class="mask bg-gradient-primary opacity-4"></span>
-<!--main 화면-->>
-       <div class="container position-sticky z-index-sticky top-0">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-header blur border-radius-xl mt-0 py-md-5 top-0 z-index-3  my-3 py-6 start-0 end-0 mx-1    ">
-                        <div class="container-fluid px-5">
-                            <thead>
-                                <tr class="table-dark">
-                                    <th><h1>Today Diary</h1></th>
-                                </tr>
-                            </thead>
-                             <!--부트스트랩-->
-                            <div class="container my-3">
-                                <table class="table">
-                                    <thead>
-                                    <tr class="table-dark">
-                                        <th>국가</th><th>뉴스 내용</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% if diary_list %}
-                                    {% for diary in diary_list %}
-                                    <tr>
-                                        <td>{{ diary.state }}</td>
-                                        <td>
-                                            <a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.content }}</a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    {% else %}
-                                    <tr>
-                                        <td colspan="3">질문이 없습니다.</td>
-                                    </tr>
-                                    {% endif %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--부트스트랩 end-->
-                        </div>
-                    </div>
-                </div>
+  <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+    <span class="mask bg-gradient-primary opacity-4"></span>
+    <!--main 화면-->>
+    <div class="container position-sticky z-index-sticky top-0">
+      <div class="page-header blur border-radius-xl mt-0 py-md-5 top-0 my-3 py-6 start-0 end-0 mx-1">
+        <div class="container px-3">
+          <div class="row px-5">
+            <thead>
+              <tr class="table-dark">
+                <th>
+                  <h4 class="display-4 m-0">Today Diary</h4>
+                </th>
+              </tr>
+            </thead>
+            <!--부트스트랩-->
+            <div class="container my-3">
+              <table class="table">
+                <thead>
+                  <tr class="table-dark">
+                    <th>국가</th>
+                    <th>뉴스 내용</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if diary_list %}
+                  {% for diary in diary_list %}
+                  <tr>
+                    <td>{{ diary.state }}</td>
+                    <td>
+                      <a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.content }}</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td colspan="3">질문이 없습니다.</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
             </div>
+            <!--부트스트랩 end-->
+          </div>
+          <div class="row">
+            <div class="col-lg-2 col-md-4 col-6 ms-auto">
+              <div class="col ms-auto">
+                <button type="button" class="btn btn-default mb-0">
+                  <p class="mb-0 ps-2"><strong><- 하루 전</strong></p>
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-4 col-6"></div>
+            <div class="col-lg-2 col-md-4 col-6 me-md-auto mx-md-0">
+              <div class="col ms-auto">
+                <button type="button" class="btn btn-default mb-0">
+                  <p class="mb-0 ps-2"><strong>하루 뒤 -></strong></p>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-<!--main 화면 end-->>
-    </div>                    
+      </div>
+    </div>
+    <!--main 화면 end-->>
+  </div>
 </header>
 {% endblock %}
