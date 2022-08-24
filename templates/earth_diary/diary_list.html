@@ -5,32 +5,47 @@
 <header class="header-2">
   <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
     <span class="mask bg-gradient-primary opacity-4"></span>
-    <div class="container">
-      <div class="info-horizontal blur border-radius-xl d-block d-md-flex p-4">  <!--page-header blur border-radius-xl py-5 py-md-4 my-sm-3 mb-3-->
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <h1 class="display-4">Today Diary</h2>
+    <div class="container blur border-radius-xl p-4">
+      <div class="row">
+        <div class="row">  <!--page-header blur border-radius-xl py-5 py-md-4 my-sm-3 mb-3-->
+          <div class="col py-3">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <h4 class="display-4">Today Diary</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3"><p class="lead">국가</p></div>
+                <div class="col-sm-9"><p class="lead">뉴스 내용</p></div>
+              </div>
+              {% if diary_list %}
+              <dl class="row">
+                {% for diary in diary_list %}
+                <dt class="col-sm-3"><a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.state }}</a></dt>
+                <dd class="col-sm-9">{{ diary.content }}</dd>
+                {% endfor %}
+              </dl>
+              {% else %}
+              <p>준비중 입니다.</p>
+              {% endif %}
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-3"><p class="lead">국가</p></div>
-            <div class="col-sm-9"><p class="lead">뉴스 내용</p></div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-md-4 col-6 ms-auto">
+            <div class="col ms-auto">
+              <button type="button" class="btn btn-default mb-0"><p class="mb-0 ps-2"><strong><- 하루 전</strong></p></button>
+            </div>
           </div>
-          {% if diary_list %}
-          <dl class="row">
-            {% for diary in diary_list %}
-            <dt class="col-sm-3"><a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.state }}</a></dt>
-            <dd class="col-sm-9">{{ diary.content }}</dd>
-            {% endfor %}
-          </dl>
-          {% else %}
-          <p>준비중 입니다.</p>
-          {% endif %}
+          <div class="col-lg-7 col-md-4 col-6"></div>
+          <div class="col-lg-2 col-md-4 col-6 me-md-auto mx-md-0">
+            <div class="col ms-auto">
+              <button type="button" class="btn btn-default mb-0"><p class="mb-0 ps-2"><strong>하루 뒤 -></strong></p></button>
+            </div>
           </div>
         </div>
       </div>
-      </a>
     </div>
   </div>
 </header>
