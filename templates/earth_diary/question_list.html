@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+ <!--부트스트랩-->
+ <div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>국가</th><th>뉴스 제목</th><th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if diary_list %}
+        {% for diary in diary_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.subject }}</a>
+            </td>
+            <td>{{ diary.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<!--부트스트랩 end-->
+{% endblock %}

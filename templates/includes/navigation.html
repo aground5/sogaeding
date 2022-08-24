@@ -85,15 +85,19 @@
                   </a>
                 </li>
                 <li class="nav-item my-auto ms-3 ms-lg-0">
-                  <a href="https://appseed.us/product/django-material-kit2-pro" target="_blank" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">로그인</a>
-                </li>
+                  <li class="nav-item ms-lg-auto">
+                    <a class="nav-link nav-link-icon me-2" href="/logout/">
+                      <i class="fa fa-sign-out me-1" aria-hidden="true"></i>
+                      <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Sign in">Log-in</p>
+                    </a>
+                  </li>
 
                 {% if request.user.is_authenticated %}
                   <li class="nav-item ms-lg-auto">
                     <a class="nav-link nav-link-icon me-2" 
-                      href="{% url 'logout' %}">
+                      href="{% url 'logout' %}">  
                       <i class="fa fa-sign-out me-1"></i>
-                      <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign OUT">Logout</p>
+                      <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sign OUT">Log-out</p>
                     </a>
                   </li>          
                 {% endif %}
