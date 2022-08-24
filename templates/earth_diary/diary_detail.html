@@ -1,22 +1,28 @@
 {% extends "base.html" %}
+{% block title %}{{diary.keyword}}{% endblock title %}
 {% block content %}
-<h1>{{ diary.state }}</h1>
-<div>
+<header class="header-2">
+  <div class="page-header min-vh-25"></div>
+</header>
+<div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+  <h1>{{ diary.state }}</h1>
+  <div>
     {{ diary.content }}
-</div>
-<h5>키워드: {{ diary.keyword }}</h5>
-<div>
+  </div>
+  <h5>키워드: {{ diary.keyword }}</h5>
+  <div>
     <ul>
-    {% for image in diary.image_set.all %}
-        <img src="{{ image.url }}">
-    {% endfor %}
+      {% for image in diary.image_set.all %}
+      <img src="{{ image.url }}">
+      {% endfor %}
     </ul>
+  </div>
+  <div>
+    <ul>
+      {% for news in diary.news_set.all %}
+      <li><a href="{{ news.url }}">{{ news.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
-<div>
-	<ul>
-		{% for news in diary.news_set.all %}
-			<li><a href="{{ news.url }}">{{ news.title }}</a></li>
-		{% endfor %}
-	</ul>
-</div>
-{% endblock %}
+{% endblock content %}
