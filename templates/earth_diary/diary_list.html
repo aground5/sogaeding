@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% block title %}메인화면{% endblock title %}
+
 {% block content %}
 <header class="header-2">
   <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
@@ -25,40 +27,6 @@
           {% else %}
           <p>준비중 입니다.</p>
           {% endif %}
-          {% comment %} <!--
-            <table class="table">
-              <thead>
-                <tr class="table-black">
-                  <th>
-                    <h2>Today Diary</h2>
-                    <th />
-                </tr>
-              </thead>
-              <thead>
-                <th>번호</th>
-                <th>뉴스 내용</th>
-                <th>작성 일시</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% if diary_list %}
-                {% for diary in diary_list %}
-                <tr>
-                  <td>{{ forloop.counter }}</td>
-                  <td>
-                    <a href="{% url 'pybo:detail' diary.id %}">{{ diary.subject }}</a>
-                  </td>
-                  <td>{{ qdiary.create_date }}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                  <td colspan="3">질문이 없습니다.</td>
-                </tr>
-                {% endif %}
-              </tbody>
-            </table>
-          --> {% endcomment %}
           </div>
         </div>
       </div>
@@ -66,4 +34,5 @@
     </div>
   </div>
 </header>
-{% endblock %}
+{% endblock content %}
+{% block javascripts %}{% endblock javascripts %}
