@@ -1,0 +1,51 @@
+version: '3.8'
+
+volumes:
+  db_data:
+
+services:
+  mysql:
+    container_name: mysql
+    restart: always
+    image: "mysql:latest"
+    ports:
+      - "3306:${DB_PORT}"
+    env_file:
+      - ".mysqlsecrets"
+    command: # 명령어 실행
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db_data:/var/lib/mysql # -v 옵션 (다렉토리 마운트 설정)
+    networks:
+      - db_network
+  earth_diary:
+    container_name: earth_diary
+    restart: always
+    build: .
+    volumes:
+      - ./.static_root:/.static_root
+    networks:
+      - db_network
+      - web_network
+    depends_on:
+      - mysql
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./.static_root:/static
+    networks:
+      - web_network
+    depends_on: 
+      - earth_diary
+
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
+ 
