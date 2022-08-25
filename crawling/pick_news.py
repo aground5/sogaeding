@@ -44,7 +44,7 @@ if __name__ == "__main__":
     selected_url = get_news_keyword(keyword_dict, freq_items)
     with open(f"{today}/news.pickle", "rb") as f:
         news = pickle.load(f)
-    with open(f"{today}/selected", "rt") as sel:
+    with open(f"{today}/selected_kor", "rt") as sel:
         for i in range(3):
             sel.write('url: ' + selected_url[i] + '\n')
             sel.write(news[selected_url[i]] + '\n\n')

@@ -7,7 +7,7 @@ mkdir $TODAY
 fi
 echo "./naver_news.py start"
 python3 ./naver_news.py
-echo "./keyword.py start"
-python3 ./keyword.py
-echo "./pick_news.py start"
-python3 ./pick_news.py
+echo "./crawling_keyword.py start"
+python3 ./crawling_keyword.py
+echo "./crawling_pick_news.py start"
+python3 ./crawling_pick_news.py

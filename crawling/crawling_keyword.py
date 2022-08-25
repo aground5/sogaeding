@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 from konlpy.tag import Mecab
 import pickle
 
-from parsing import get_index_terms
+from crawling_parsing import get_index_terms
 import sys
 from naver_news import today
 
