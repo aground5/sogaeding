@@ -1,0 +1,10 @@
+version: '3.8'
+
+volumes:
+  crawl_volume:
+services:
+  crawl:
+    container_name: crawl
+    build: .
+    volumes:
+      - crawl_volume:/data

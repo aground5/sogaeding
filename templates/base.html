@@ -78,10 +78,23 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/material-kit.css?v=3.0.0" rel="stylesheet" />
   {% block style %}{% endblock style %}
+  <style>
+	@font-face {
+		font-family: 'EarlyFontDiary';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'LeeSeoyun';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+  </style>
 </head>
 
-<body class="presentation-page bg-gray-200">
-
+<body class="presentation-page bg-gray-200" style="font-family: EarlyFontDiary;">
   {% include 'includes/navigation.html' %}
 
   {% block content %} {% endblock content %}

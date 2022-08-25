@@ -1,10 +1,15 @@
-venv/
-__pycache__/
 .vscode/
 db.sqlite3
 secrets.json
 .mysqlsecrets
 .static_root
 templates copy
+crawling/2022*/
+crawling/*.txt
+crawling/*.pickle
+crawling/test*
+crawling/tmp*
+__pycache__/
+venv/
 
 .DS_Store

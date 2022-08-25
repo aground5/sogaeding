@@ -18,5 +18,6 @@ class News(models.Model) :
     title = models.CharField(max_length=300)    # 뉴스 제목
     url = models.TextField()                    # 뉴스 URL
 
-class Comment(models.Model) :
+class Heart(models.Model) :
     diary = models.ForeignKey(Diary, on_delete=models.CASCADE)
+    userid = models.IntegerField()

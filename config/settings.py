@@ -134,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'ko-kr'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
 USE_TZ = True
 
@@ -158,17 +158,18 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
 
+CSP_DEFAULT_SRC = ("'self'")
+CSP_IMG_SRC = ("'self' 'unsafe-inline' * data:")
+CSP_FONT_SRC = ("'self' fonts.gstatic.com ka-f.fontawesome.com cdn.jsdelivr.net")
+CSP_STYLE_SRC = ("'self' 'unsafe-inline' fonts.googleapis.com")
+CSP_SCRIPT_SRC_ELEM = ("'self'")
+CSP_CONNECT_SRC = ("*")
+CSP_INCLUDE_NONCE_IN = [
+	"script-src-elem",
+]
 # CSP 설정
 if env('CSP') :
-    CSP_DEFAULT_SRC = ("'self'")
-    CSP_IMG_SRC = ("'self' 'unsafe-inline' * data:")
-    CSP_FONT_SRC = ("'self' fonts.gstatic.com ka-f.fontawesome.com")
-    CSP_STYLE_SRC = ("'self' 'unsafe-inline' fonts.googleapis.com")
-    CSP_SCRIPT_SRC_ELEM = ("'self'")
-    CSP_CONNECT_SRC = ("*")
-    CSP_INCLUDE_NONCE_IN = [
-        "script-src-elem",
-    ]
+    CSP_REPORT_ONLY = False
 else :
     CSP_REPORT_ONLY = True
 
