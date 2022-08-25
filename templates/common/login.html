@@ -14,14 +14,12 @@
                             {% include "form_errors.html" %}
         <div class="mb-3">
             <label for="username">사용자ID</label>
-            <input class="login-form-field">
-                        <input type="text" class="form-control" name="username" id="username"
+            <input type="text" class="login-form-field" name="username" id="username" 
                         value="{{ form.username.value|default_if_none:'' }}">
         </div>
         <div class="mb-3">
             <label for="password">비밀번호</label>
-            <input class="login-form-field">
-            <input type="password" class="form-control" name="password" id="password"
+            <input type="password"  name="password" id="password" class="login-form-field"
                    value="{{ form.password.value|default_if_none:'' }}">    
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
