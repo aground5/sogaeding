@@ -45,7 +45,7 @@ def get_key_words(f):
 	mecab = Mecab()
 	key_word = {}
 	i = 0
-	with open(f"{today}/news.txt", "r") as file:
+	with open(f"data/{today}/news.txt", "r") as file:
 		file_len = len(file.readlines()) // 3 + 1
 		file.seek(0)
 		for line in file.readlines():
@@ -67,8 +67,8 @@ def get_key_words(f):
 	return key_word
 
 if __name__ == "__main__":
-	key_word_file = open(f"{today}/key_word.txt", "wt")
-	key_word_pickle = open(f"{today}/key_word.pickle", "wb")
+	key_word_file = open(f"data/{today}/key_word.txt", "wt")
+	key_word_pickle = open(f"data/{today}/key_word.pickle", "wb")
 
 	key_word = get_key_words(key_word_file)
 	pickle.dump(key_word, key_word_pickle)
