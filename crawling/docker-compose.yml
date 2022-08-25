@@ -5,7 +5,6 @@ volumes:
 services:
   crawl:
     container_name: crawl
-    restart: always
     build: .
     volumes:
-      - crawl:/data
+      - crawl_volume:/data
