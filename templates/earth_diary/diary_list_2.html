@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}메인화면{% endblock title %}
+{% block style %}{% endblock style %}
+{% block content %}
+<header class="header-2">
+  <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+    <span class="mask bg-gradient-primary opacity-4"></span>
+  </div>
+  <div class="container blur border-radius-xl p-4 mt-n30 z-index-2">
+    <div class="row">
+      <div class="row">
+        <!--page-header blur border-radius-xl py-5 py-md-4 my-sm-3 mb-3-->
+        <div class="col py-3">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <h4 class="display-4">Diary <small class="text-muted" style="font-size : 60%">at {{ today }}</small></h4>
+              </div>
+            </div>
+            {% if diary_list %}
+            <div class="row">
+              {% for diary in diary_list %}
+              <div class="col-md-4 mt-4 my-4 mt-ng-30">
+                <div class="card h-100" data-animation="false">
+                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <a class="d-block blur-shadow-image">
+                      <img
+                        src="{{ diary.image_set.all.0.url }}"
+                        alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                    </a>
+                    <!-- <div class="colored-shadow"
+                      style="background-image: url(&quot;https://demos.creative-tim.com/test/material-dashboard-pro/assets/img/products/product-1-min.jpg&quot;);">
+                    </div> -->
+                  </div>
+                  <div class="card-body">
+                    <h5 class="font-weight-normal mt-3 text-center">
+                      <a href="{% url 'earth_diary:detail' diary.id %}">{{ diary.keyword }}</a>
+                    </h5>
+                    <p class="mb-0">
+                      {{ diary.content }}
+                    </p>
+                  </div>
+                  <hr class="dark horizontal my-0">
+                  <div class="card-footer d-flex">
+                    <p class="font-weight-normal my-auto"></p>
+                    <i class="material-icons position-relative ms-auto text-lg me-1 my-auto">place</i>
+                    <p class="text-sm my-auto">{{ diary.state }}</p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+            <p>준비중 입니다.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 mx-auto">
+          <a href="{% url 'earth_diary:date' prev_date %}">
+            <button type="button" class="btn btn-default mb-0 float-start">
+              <p class="mb-0 ps-2"><strong>
+                  <- 하루 전</strong>
+              </p>
+            </button>
+          </a>
+        </div>
+        <div class="col-5 mx-auto">
+          <a href="{% url 'earth_diary:date' next_date %}">
+            <button type="button" class="btn btn-default mb-0 float-end">
+              <p class="mb-0 ps-2"><strong>하루 뒤 -></strong></p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock content %}
+{% block javascripts %}{% endblock javascripts %}

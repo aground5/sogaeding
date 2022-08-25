@@ -45,20 +45,21 @@
             <!--부트스트랩 end-->
           </div>
           <div class="row">
-            <div class="col-lg-2 col-md-4 col-6 ms-auto">
-              <div class="col ms-auto">
-                <button type="button" class="btn btn-default mb-0">
-                  <p class="mb-0 ps-2"><strong><- 하루 전</strong></p>
+            <div class="col-5 mx-auto">
+              <a href="{% url 'earth_diary:date' prev_date %}">
+                <button type="button" class="btn btn-default mb-0 float-start">
+                  <p class="mb-0 ps-2"><strong>
+                      <- 하루 전</strong>
+                  </p>
                 </button>
-              </div>
+              </a>
             </div>
-            <div class="col-lg-7 col-md-4 col-6"></div>
-            <div class="col-lg-2 col-md-4 col-6 me-md-auto mx-md-0">
-              <div class="col ms-auto">
-                <button type="button" class="btn btn-default mb-0">
+            <div class="col-5 mx-auto">
+              <a href="{% url 'earth_diary:date' next_date %}">
+                <button type="button" class="btn btn-default mb-0 float-end">
                   <p class="mb-0 ps-2"><strong>하루 뒤 -></strong></p>
                 </button>
-              </div>
+              </a>
             </div>
           </div>
         </div>

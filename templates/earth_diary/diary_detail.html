@@ -20,38 +20,44 @@
 <header class="header-2">
   <div class="page-header min-vh-25"></div>
 </header>
-<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
-  <div class="container p-4">
-    <p>
-      <span style="font-size : 300%;"><b>{{ diary.state }}</b></span>
-      <span style="font-size : 200%">
-        <{{ diary.keyword }}>
-      </span>
-    </p>
-    <div>
-      {{ diary.content }}
-    </div>
-    <div>
-      <ul>
-        <table>
-          <tr>
-            {% for image in diary.image_set.all %}
-            <td>
-              <div class="box" style="background: #BDBDBD;">
-                <img class="profile" src="{{ image.url }}"/>
-              </div>
-            </td>
-            {% endfor %}
-          </tr>
-        </table>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        {% for news in diary.news_set.all %}
-        <li><a href="{{ news.url }}">{{ news.title }}</a></li>
-        {% endfor %}
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card card-body blur shadow-blur mt-n6">
+        <div class="container p-5">
+          <p>
+            <span style="font-size : 300%;"><b>{{ diary.state }}</b></span>
+            <span style="font-size : 200%">
+              <{{ diary.keyword }}>
+            </span>
+          </p>
+          <div>
+            {{ diary.content }}
+          </div>
+          <div>
+            <ul>
+              <table>
+                <tr>
+                  {% for image in diary.image_set.all %}
+                  <td>
+                    <div class="box" style="background: #BDBDBD;">
+                      <img class="profile" src="{{ image.url }}"/>
+                    </div>
+                  </td>
+                  {% endfor %}
+                </tr>
+              </table>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              {% for news in diary.news_set.all %}
+              <li><a href="{{ news.url }}">{{ news.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
