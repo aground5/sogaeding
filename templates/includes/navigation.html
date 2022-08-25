@@ -7,7 +7,7 @@
         <div class="container-fluid px-0">
           <a class="navbar-brand font-weight-bolder px-2" href="/" rel="tooltip" title="지구 일기장 메인화면"
             data-placement="bottom">
-            지구 일기장
+            <id>지구 일기장
           </a>
           <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
@@ -131,8 +131,12 @@
               </li>
               {% else %}
               <li class="nav-item my-auto ms-3 ms-lg-0">
-                <a href="{% url 'common:login' %}" target="_blank"
+                <a href="{% url 'common:login' %}"
                   class="btn btn-sm bg-gradient-primary mb-0 me-1 mt-2 mt-md-0">로그인</a>
+              </li>
+              <li class="nav-item my-auto ms-3 ms-lg-0">
+                <a href="{% url 'common:signup' %}"
+                  class="btn btn-sm bg-gradient-primary mb-0 me-1 mt-2 mt-md-0">회원가입</a>
               </li>
               {% endif %}
             </ul>
