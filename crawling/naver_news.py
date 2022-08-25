@@ -42,8 +42,8 @@ def get_content(page):
 if __name__ == "__main__":
     top_news = get_rankpages()
     news_dict = {}
-    new_pic = open(f"{today}/news.pickle", "wb")
-    with open(f'{today}/news.txt', "w") as file:
+    new_pic = open(f"data/{today}/news.pickle", "wb")
+    with open(f'data/{today}/news.txt', "w") as file:
         for page in top_news.values():
             content = get_content(page)
             file.write('url: '+ str(page) + '\n')

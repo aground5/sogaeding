@@ -1,5 +1,6 @@
 #!/bin/bash
-
+mkdir /data
+./setup.sh
 TODAY=`date "+%Y%m%d"`
 if [ `ls -l | grep $TODAY | wc -l` == 0 ]
 then 

@@ -33,18 +33,18 @@ def get_news_keyword(keyword_dict, freq_items):
 
 if __name__ == "__main__":
     
-    news_file = open(f"{today}/news.txt", "r")
-    freq_file = open(f"{today}/freq.txt", "w")
+    news_file = open(f"data/{today}/news.txt", "r")
+    freq_file = open(f"data/{today}/freq.txt", "w")
 
-    with open(f"{today}/key_word.pickle", "rb") as f:
+    with open(f"data/{today}/key_word.pickle", "rb") as f:
         keyword_dict = pickle.load(f)
     freq_items = calc_freq(keyword_dict, freq_file)
     news_file.close()
     freq_file.close()
     selected_url = get_news_keyword(keyword_dict, freq_items)
-    with open(f"{today}/news.pickle", "rb") as f:
+    with open(f"data/{today}/news.pickle", "rb") as f:
         news = pickle.load(f)
-    with open(f"{today}/selected", "rt") as sel:
+    with open(f"data/{today}/selected", "rt") as sel:
         for i in range(3):
             sel.write('url: ' + selected_url[i] + '\n')
             sel.write(news[selected_url[i]] + '\n\n')
