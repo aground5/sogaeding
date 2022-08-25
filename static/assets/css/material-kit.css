@@ -7224,7 +7224,7 @@ textarea.form-control-lg {
   --bs-text-opacity: 1; }
 
 .bg-primary {
-  background-color: #e91e63 !important; }
+  background-color: #d9ceba !important; }
 
 .bg-secondary {
   background-color: #7b809a !important; }
@@ -14142,7 +14142,7 @@ svg.text-dark .color-background {
   .blur.blur-rounded {
     border-radius: 40px; }
   .blur.blur-light {
-    background-color: rgba(255, 255, 255, 0.4); }
+    background-color: rgba(255, 255, 255, 0.5); }
   .blur.blur-dark {
     background-color: rgba(0, 0, 0, 0.3); }
 
