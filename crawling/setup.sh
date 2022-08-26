@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /tmp
+cd /
 wget https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz
 tar xvfz mecab-0.996-ko-0.9.2.tar.gz
 cd mecab-0.996-ko-0.9.2
@@ -8,7 +8,7 @@ cd mecab-0.996-ko-0.9.2
 make -j check
 make -j install
 
-cd /tmp
+cd /
 wget https://bitbucket.org/eunjeon/mecab-ko-dic/downloads/mecab-ko-dic-2.1.1-20180720.tar.gz
 tar xvfz mecab-ko-dic-2.1.1-20180720.tar.gz
 cd mecab-ko-dic-2.1.1-20180720
@@ -18,16 +18,9 @@ cd mecab-ko-dic-2.1.1-20180720
 make -j
 make -j install
 
-cd /tmp
+cd /
 git clone https://bitbucket.org/eunjeon/mecab-python-0.996.git
 cd mecab-python-0.996
 python setup.py build
-
-
-cd /tmp
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_aarch64.deb
-dpkg -i google-chrome-stable_current_aarch64.deb
-apt install --fix-broken -y
-dpkg -i google-chrome-stable_current_aarch64.deb
 
 cd /
