@@ -1,4 +1,4 @@
-import pickle
+import json
 import datetime
 
 from naver_news import today
@@ -38,14 +38,14 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print("file is not found")
 
-    with open(f"data/{today}/key_word.pickle", "rb") as f:
-        keyword_dict = pickle.load(f)
+    with open(f"data/{today}/key_word.json", "rb") as f:
+        keyword_dict = json.load(f)
     freq_items = calc_freq(keyword_dict, freq_file)
     news_file.close()
     freq_file.close()
     selected_url = get_news_keyword(keyword_dict, freq_items)
-    with open(f"data/{today}/news.pickle", "rb") as f:
-        news = pickle.load(f)
+    with open(f"data/{today}/news.json", "rb") as f:
+        news = json.load(f)
     with open(f"data/{today}/selected_kor.txt", "wt") as sel:
         for i in range(3):
             sel.write('url: ' + selected_url[i] + '\n')

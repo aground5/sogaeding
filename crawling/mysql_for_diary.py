@@ -1,6 +1,6 @@
 import pymysql
 import datetime
-import pickle
+import json
 from bs4 import BeautifulSoup
 from naver_news import today
 import requests
@@ -20,6 +20,8 @@ def get_title(url):
 		raise Exception()
 	news_page = BeautifulSoup(response.text, 'html.parser')
 	title = news_page.find('h2', {'class' : 'media_end_head_headline'})
+	if not title:
+		raise
 	title = title.get_text()
 	return re.sub("\[.*?\]|〈.*?〉|.앵커.|【.*】|※.*|공동취재사진", '', title)
 
@@ -34,8 +36,8 @@ img_cmd = 'INSERT INTO earth_diary_image (url, diary_id) values (%s,%s)'	#img_ur
 selete_cmd = "SELECT id FROM earth_diary_diary WHERE keyword=%s" #table, content
 
 
-with open(f"./data/{today}/key_word.pickle", "rb") as kwp:
-	keyword_dict = pickle.load(kwp)
+with open(f"./data/{today}/key_word.json", "rb") as kwp:
+	keyword_dict = json.load(kwp)
 
 with open(f"./data/{today}/summary_kor.txt", "rt") as sumfile:
 	cntnt_key = []

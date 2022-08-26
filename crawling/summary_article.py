@@ -24,7 +24,6 @@ model = BartModel.from_pretrained(get_pytorch_kobart_model())
 
 def summerize(text, model, tokenizer):
     input_ids = tokenizer.encode(text, return_tensors="pt")
-    print(text)
    # Generate Summary Text Ids
     summary_text_ids = model.generate(
         input_ids=input_ids,

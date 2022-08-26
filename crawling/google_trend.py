@@ -35,9 +35,13 @@ news_pages = []
 for issue in ggt.findall("item"):
 	if i > 2:
 		break
-	title = issue.findtext("title")
-	news = issue.find("ht:news_item", namespaces)
-	url = news.find("ht:news_item_url", namespaces).text
+	try:
+		title = issue.findtext("title")
+		news = issue.find("ht:news_item", namespaces)
+		url = news.find("ht:news_item_url", namespaces).text
+	except:
+		print("xml parsing error", file = sys.stderr)
+		raise
 	print(url)
 	content, keywords, title = get_content(url)
 	print(url)
