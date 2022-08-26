@@ -54,46 +54,42 @@ tokenizer = BartTokenizer.from_pretrained('facebook/bart-large-cnn')
 translator = Translator()
 
 
-sum_eng_file = open(f"./data/{today}/summary_eng.txt", "wt")
-with open(f"./data/{today}/selected_eng.txt", "rt") as engfile:
-    for line in engfile.readlines():
-        line = line.strip()
-        
-        if line[:5] == 'url: ':
-            url = line[5:]
-            continue
-        elif not line:
-          continue
-        elif len(line)>3000:
-          line = line[:3000]
-          continue
-        ARTICLE_TO_SUMMARIZE = line 
-        #ARTICLE ~ == 원하는 영어 문장이 들어가야 함.
-        inputs = tokenizer([ARTICLE_TO_SUMMARIZE], return_tensors='pt')
-        summary_ids = model.generate(inputs['input_ids'], max_length=300, early_stopping=False)
-        summary_ids
-        result_sum = str([tokenizer.decode(g, skip_special_tokens=True) for g in summary_ids])
-        result = translator.translate(result_sum, dest='ko')
+with open(f"./data/{today}/summary_eng.txt", "wt") as sum_eng_file:
+    with open(f"./data/{today}/selected_eng.txt", "rt") as engfile:
+        for line in engfile.readlines():
+            line = line.strip()
+            if line[:5] == 'url: ':
+                url = line[5:]
+                continue
+            elif not line:
+                continue
+            elif len(line)>3000:
+                line = line[:3000]
+            ARTICLE_TO_SUMMARIZE = line 
+            #ARTICLE ~ == 원하는 영어 문장이 들어가야 함.
+            inputs = tokenizer([ARTICLE_TO_SUMMARIZE], return_tensors='pt')
+            summary_ids = model.generate(inputs['input_ids'], max_length=300, early_stopping=False)
+            summary_ids
+            result_sum = str([tokenizer.decode(g, skip_special_tokens=True) for g in summary_ids])
+            result = translator.translate(result_sum, dest='ko')
 
-        sum_eng_file.write('url: ' + url + '\n')
-        sum_eng_file.write((result.text) + '\n\n')  
-sum_eng_file.close()
+            sum_eng_file.write('url: ' + url + '\n')
+            sum_eng_file.write((result.text) + '\n\n')
 
 #  Load Model and Tokenize
 
-sum_kor_file = open(f"./data/{today}/summary_kor.txt", "wt")
-with open(f"./data/{today}/selected_kor.txt", "rt") as korfile:
-    model = BartForConditionalGeneration.from_pretrained("ainize/bart-news")
-    tokenizer = PreTrainedTokenizerFast.from_pretrained("ainize/bart-news")
-    for line in korfile.readlines():
-        line = line.strip()
-        if line[:5] == 'url: ':
-            url = line[5:]
-            continue
-        elif not line:
-            continue
-        summarized = summerize(line, model, tokenizer)
-        
-        sum_kor_file.write('url: ' + url + '\n')
-        sum_kor_file.write(summarized + '\n\n')  
-sum_kor_file.close()
+with open(f"./data/{today}/summary_kor.txt", "wt") as sum_kor_file:
+    with open(f"./data/{today}/selected_kor.txt", "rt") as korfile:
+        model = BartForConditionalGeneration.from_pretrained("ainize/kobart-news")
+        tokenizer = PreTrainedTokenizerFast.from_pretrained("ainize/kobart-news")
+        for line in korfile.readlines():
+            line = line.strip()
+            if line[:5] == 'url: ':
+                url = line[5:]
+                continue
+            elif not line:
+                continue
+            summarized = summerize(line, model, tokenizer)
+            
+            sum_kor_file.write('url: ' + url + '\n')
+            sum_kor_file.write(summarized + '\n\n')
