@@ -2,7 +2,7 @@ from datetime import date as module_date, timedelta
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, JsonResponse, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-
+from .screenshot import enviar_email
 from .models import Diary, Heart
 
 # Create your views here.
@@ -74,8 +74,13 @@ def api_heart(request, diary_id, userid) :
 
 def api_screenshot(request):
     if request.method == "POST":
-        print(type(request.POST))
-    return JsonResponse("")
+        f = open("output.txt", "wt")
+        f.write(request.POST.get("data"))
+        f.close()
+        if enviar_email(request.POST.get("data"), request.user.email) :
+            return HttpResponse("sended")
+        else :
+            return Http404()
         
 def test(request) :
     return render(request, 'test.html', {})

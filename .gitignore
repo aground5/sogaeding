@@ -6,7 +6,6 @@ secrets.json
 .cache
 templates copy
 crawling/2022*/
-crawling/*.txt
 crawling/*.pickle
 crawling/test*
 crawling/tmp*

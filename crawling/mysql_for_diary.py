@@ -30,7 +30,7 @@ diary_cmd = 'INSERT INTO earth_diary_diary ({},{},{},{})'	#date, country, conten
 news_cmd = 'INSERT INTO earth_diary_news ({},{},{})' #title, url, diary_id
 img_cmd = 'INSERT INTO earth_diary_news ({},{})'	#img_url, dia_id
 
-selete_cmd = 'SELETE id FROM {} WHERE content={}' #table, content
+selete_cmd = 'SELETE id FROM {} WHERE content="{}"' #table, content
 
 
 with open(f"./data/{today}/key_word.pickle", "rb") as kwp:
@@ -67,7 +67,7 @@ with open(f"./data/{today}/summary_eng.txt", "rt") as sumfile:
 				continue
 			if line[:5] == 'url: ':
 				url = line[5:]
-		
+				continue
 			keyti = keywordsfile.readline().strip().split('///')
 			keywords, title = keyti[0], keyti[1]
 		
