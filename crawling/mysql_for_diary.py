@@ -24,7 +24,7 @@ def get_title(url):
 	return re.sub("\[.*?\]|〈.*?〉|.앵커.|【.*】|※.*|공동취재사진", '', title)
 
 date = datetime.datetime.now()
-db_connect = pymysql.connect(host=sql["HOST"], port=sql["PORT"], user=sql["USER"], passwd=sql["PASSWORD"], charset='utf8')
+db_connect = pymysql.connect(host=sql["HOST"], port=int(sql["PORT"]), user=sql["USER"], passwd=sql["PASSWORD"], charset='utf8')
 db_connected = db_connect.cursor()
 diary_cmd = 'INSERT INTO earth_diary_diary ({},{},{},{})'	#date, country, content, keyword
 news_cmd = 'INSERT INTO earth_diary_news ({},{},{})' #title, url, diary_id

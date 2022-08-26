@@ -33,7 +33,7 @@
     html2canvas(html[0]).then (function (canvas) {
       let xhr = new XMLHttpRequest();
 	  let data = new FormData(ssform);
-	  data.append({"data": canvas.toDataURL("image/jpeg")});
+	  data.append("data", canvas.toDataURL("image/jpeg"));
       xhr.open("POST", "{% url 'earth_diary:screenshot' %}", true);
       xhr.send(data);
       xhr.onprogress = function () {
