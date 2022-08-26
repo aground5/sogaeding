@@ -23,14 +23,15 @@ def get_title(url):
 	title = title.get_text()
 	return re.sub("\[.*?\]|〈.*?〉|.앵커.|【.*】|※.*|공동취재사진", '', title)
 
-date = datetime.datetime.now()
+date = datetime.datetime.now().strftime("%Y-%m-%d")
 db_connect = pymysql.connect(host=sql["HOST"], port=int(sql["PORT"]), user=sql["USER"], passwd=sql["PASSWORD"], charset='utf8')
 db_connected = db_connect.cursor()
-diary_cmd = 'INSERT INTO earth_diary_diary ({},{},{},{})'	#date, country, content, keyword
-news_cmd = 'INSERT INTO earth_diary_news ({},{},{})' #title, url, diary_id
-img_cmd = 'INSERT INTO earth_diary_news ({},{})'	#img_url, dia_id
+db_connected.execute('USE mysql')
+diary_cmd = 'INSERT INTO earth_diary_diary (date, state, content, keyword) values (%s,%s,%s,%s)'	#date, country, content, keyword
+news_cmd = 'INSERT INTO earth_diary_news (title, url, diary_id) values (%s,%s,%s)' #title, url, diary_id
+img_cmd = 'INSERT INTO earth_diary_image (url, diary_id) values (%s,%s)'	#img_url, dia_id
 
-selete_cmd = 'SELETE id FROM {} WHERE content="{}"' #table, content
+selete_cmd = "SELECT id FROM earth_diary_diary WHERE keyword=%s" #table, content
 
 
 with open(f"./data/{today}/key_word.pickle", "rb") as kwp:
@@ -46,18 +47,22 @@ with open(f"./data/{today}/summary_kor.txt", "rt") as sumfile:
 		if line[:5] == 'url: ':
 			url = line[5:]
 			continue
-		print(url)
-		cntnt_key.append((line, keyword_dict[url]))
-		dic_id = db_connected.execute(selete_cmd.format('earth_diary_diary', line))
-		
-		img = img_url(keyword_dict[url][0], is_kor=True)[0]
-		ttl_url_id_img.append((get_title(url), url, dic_id, img))
+		cntnt_key.append((line, keyword_dict[url][0]))
+		img = ""#img_url(keyword_dict[url][0])[0]
+		ttl_url_id_img.append((get_title(url), url, img))
 
+	did_lst = []
 	for content, keyword in cntnt_key:
-		db_connected.execute(diary_cmd.format(date, '한국', content, keyword))
-	for title, url, did, img in ttl_url_id_img:
-		db_connected.execute(news_cmd.format(title, url, did))
-		db_connected.execute(img_cmd.format(img, did))
+		db_connected.execute(diary_cmd,(date, '한국', content, keyword))
+		db_connected.execute(selete_cmd,(keyword))
+		dic_id = db_connected.fetchone()
+		did_lst.append(dic_id[0])
+	i=0
+	for title, url, img in ttl_url_id_img:
+		did = did_lst[i]
+		db_connected.execute(news_cmd,(title, url, did))
+		db_connected.execute(img_cmd,(img, did))
+		i+=1
 
 
 with open(f"./data/{today}/summary_eng.txt", "rt") as sumfile:
@@ -71,9 +76,9 @@ with open(f"./data/{today}/summary_eng.txt", "rt") as sumfile:
 				continue
 			keyti = keywordsfile.readline().strip().split('///')
 			keywords, title = keyti[0], keyti[1]
-		
-			db_connected.execute(diary_cmd.format(date, '미국', line, keywords))
-			did = db_connected.execute(selete_cmd.format('earth_diary_news', line))
-			db_connected.execute(news_cmd.format(title, url, did))
-			img = img_url(keywords.replace(',', ''))[0]
-			db_connected.execute(img_cmd.format(img, did))
+			db_connected.execute(diary_cmd, (date, '미국', line, keywords))
+			db_connected.execute(selete_cmd,(keywords))
+			did = db_connected.fetchone()[0]
+			db_connected.execute(news_cmd, (title, url, did))
+			img = ""#img_url(keywords.replace(',', ''))[0]
+			db_connected.execute(img_cmd, (img, did))
