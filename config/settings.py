@@ -162,7 +162,7 @@ CSP_DEFAULT_SRC = ("'self'")
 CSP_IMG_SRC = ("'self' 'unsafe-inline' * data:")
 CSP_FONT_SRC = ("'self' fonts.gstatic.com ka-f.fontawesome.com cdn.jsdelivr.net")
 CSP_STYLE_SRC = ("'self' 'unsafe-inline' fonts.googleapis.com")
-CSP_SCRIPT_SRC_ELEM = ("'self'")
+CSP_SCRIPT_SRC_ELEM = ("'self' html2canvas.hertzen.com")
 CSP_CONNECT_SRC = ("*")
 CSP_INCLUDE_NONCE_IN = [
 	"script-src-elem",
@@ -177,3 +177,6 @@ else :
 SECURE_HSTS_SECONDS = 31536000  # 365 * 24 * 60 * 60
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# screenshot email send info
+EMAIL = get_secret('EMAIL')

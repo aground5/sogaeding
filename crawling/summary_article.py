@@ -74,7 +74,7 @@ with open(f"./data/{today}/summary_eng.txt", "wt") as sum_eng_file:
             result = translator.translate(result_sum, dest='ko')
 
             sum_eng_file.write('url: ' + url + '\n')
-            sum_eng_file.write((result.text) + '\n\n')
+            sum_eng_file.write((result.text)[2:-2] + '\n\n')
 
 #  Load Model and Tokenize
 

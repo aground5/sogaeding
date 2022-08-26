@@ -8,3 +8,4 @@ CygnusX1
 transformers
 googletrans==4.0.0-rc1
 pymysql
+newspaper3k

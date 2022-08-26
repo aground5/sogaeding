@@ -24,24 +24,26 @@
 
 <!-- 소개딩 현장미션 html2canvas -->
 <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-<script>
+<script nonce="{{ request.csp_nonce }}" type="text/javascript">
   const html = document.getElementsByTagName('html');
   const screenshot = document.getElementById('screenshot');
   const ssform = document.getElementById('screenshot_form');
   screenshot.addEventListener('click', function (evnt) {
     let button = this;
     html2canvas(html[0]).then (function (canvas) {
+	  button.textContent = "전송중";
       let xhr = new XMLHttpRequest();
 	  let data = new FormData(ssform);
 	  data.append("data", canvas.toDataURL("image/jpeg"));
       xhr.open("POST", "{% url 'earth_diary:screenshot' %}", true);
       xhr.send(data);
-      xhr.onprogress = function () {
-        button.textContent = "전송중";
-      };
       xhr.onload = function () {
         button.textContent = "전송완료";
         setTimeout(function () {button.textContent = "스크린샷"}, 1000);
+      };
+	  xhr.onerror = function () {
+        button.textContent = "전송실패";
+        setTimeout(function () {button.textContent = "스크린샷"}, 2000);
       };
     });
   });
