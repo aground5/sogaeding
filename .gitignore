@@ -9,7 +9,9 @@ crawling/*.txt
 crawling/*.pickle
 crawling/test*
 crawling/tmp*
+crawling/data/*
 __pycache__/
 venv/
+crawling/.cache/
 
 .DS_Store
