@@ -22,9 +22,12 @@ COPY . /
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ../secrets.json /
 # entrypoint.sh 파일 권한 변경
 RUN sed -i 's/\r//' /korea.sh
 RUN chmod +x /korea.sh
+RUN sed -i 's/\r//' /america.sh
+RUN chmod +x /america.sh
+RUN sed -i 's/\r//' /start.sh
+RUN chmod +x /start.sh
 # running entrypoint
-ENTRYPOINT ["/korea.sh"]
+ENTRYPOINT ["/start.sh"]
