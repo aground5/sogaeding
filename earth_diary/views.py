@@ -1,6 +1,6 @@
 from datetime import date as module_date, timedelta
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Diary, Heart

@@ -3,6 +3,7 @@ db.sqlite3
 secrets.json
 .mysqlsecrets
 .static_root
+.cache
 templates copy
 crawling/2022*/
 crawling/*.txt
@@ -15,3 +16,4 @@ venv/
 crawling/.cache/
 
 .DS_Store
+KoBART
