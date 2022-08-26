@@ -75,9 +75,9 @@ if __name__ == "__main__":
 	except FileNotFoundError:
 		print("file is not found")
 		raise FileNotFoundError
-
-	key_word = get_key_words(key_word_file)
-	pickle.dump(key_word, key_word_pickle)
-
-	key_word_file.close()
-	key_word_pickle.close()
+	try:
+		key_word = get_key_words(key_word_file)
+		pickle.dump(key_word, key_word_pickle)
+	finally:
+		key_word_file.close()
+		key_word_pickle.close()

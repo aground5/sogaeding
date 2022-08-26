@@ -57,5 +57,7 @@ if __name__ == "__main__":
             file.write('url: '+ str(page) + '\n')
             file.write(content + '\n\n')
             news_dict[page] = content
-    pickle.dump(news_dict, new_pic)
-    new_pic.close()
+    try:
+        pickle.dump(news_dict, new_pic)
+    finally:
+        new_pic.close()
