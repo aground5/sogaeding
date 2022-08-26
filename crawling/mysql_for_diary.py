@@ -2,7 +2,7 @@ import pymysql
 import datetime
 import pickle
 from bs4 import BeautifulSoup
-from crawling.naver_news import today
+from naver_news import today
 import requests
 import re
 
@@ -26,8 +26,8 @@ diary_cmd = 'INSERT INTO earth_diary_diary ({},{},{},{})'	#date, country, conten
 news_cmd = 'INSERT INTO earth_diary_news ({},{},{})' #title, url, diary_id
 selete_cmd = 'SELETE id FROM {} WHERE content={}' #table, content
 
-sumfile = open(f"./crawling/data/{today}/summary_kor.txt", "rt")
-with open(f"./crawling/data/{today}/key_word.pickle", "rb") as kwp:
+sumfile = open(f"./data/{today}/summary_kor.txt", "rt")
+with open(f"./data/{today}/key_word.pickle", "rb") as kwp:
 	keyword_dict = pickle.load(kwp)
 
 cntnt_key = []
@@ -52,8 +52,8 @@ for title, url, did in ttl_url_id:
 	db_connected.execute(news_cmd.format(title, url, did))
 sumfile.close()
 
-sumfile = open(f"./crawling/data/{today}/summary_eng.txt", "rt")
-keywordsfile = open(f"./crawling/data/{today}/keyword_eng.txt", "rt")
+sumfile = open(f"./data/{today}/summary_eng.txt", "rt")
+keywordsfile = open(f"./data/{today}/keyword_eng.txt", "rt")
 for line in sumfile.readlines():
 	line = line.strip()
 	if not line:

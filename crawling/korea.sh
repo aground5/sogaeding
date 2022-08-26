@@ -5,7 +5,7 @@ then
 mkdir /data
 fi
 TODAY=`date "+%Y%m%d"`
-if [ `ls -l ./data| grep $TODAY | wc -l` == 0 ]
+if [ `ls -l ./data | grep $TODAY | wc -l` == 0 ]
 then 
 mkdir /data/$TODAY
 fi

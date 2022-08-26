@@ -2,8 +2,8 @@ import datetime
 
 today = datetime.datetime.now().strftime("%Y%m%d")
 
-sum_eng_file = open(f"/crawling/data/{today}/summary_eng.txt")
-with open(f"/crawling/data/{today}/selected_eng", "rt") as engfile:
+sum_eng_file = open(f"./data/{today}/summary_eng.txt")
+with open(f"./data/{today}/selected_eng", "rt") as engfile:
     for line in engfile.readlines():
         line = line.strip()
         if line[:5] == 'url: ':
@@ -19,8 +19,8 @@ with open(f"/crawling/data/{today}/selected_eng", "rt") as engfile:
 sum_eng_file.close()
         
  
-sum_kor_file = open(f"/crawling/data/{today}/summary_kor.txt")
-with open(f"/crawling/data/{today}/selected_kor", "rt") as korfile:
+sum_kor_file = open(f"./data/{today}/summary_kor.txt")
+with open(f"./data/{today}/selected_kor", "rt") as korfile:
     for line in korfile.readlines():
         line = line.strip()
         if line[:5] == 'url: ':
