@@ -11,9 +11,10 @@ def get_content(url):
 	try:
 		arcti.download()
 		arcti.parse()
+		arcti.nlp()
 	except:
 		return None
-	return arcti.text
+	return arcti.text, arcti.keywords, arcti.title
 	
 
 try:
@@ -38,16 +39,19 @@ for issue in ggt.findall("item"):
 	news = issue.find("ht:news_item", namespaces)
 	url = news.find("ht:news_item_url", namespaces).text
 	print(url)
-	content = get_content(url)
+	content, keywords, title = get_content(url)
 	print(url)
 
 	if not content:
 		continue
 	content = content.replace('\n', '')
-	news_pages.append((url, content))
+	news_pages.append((url, content, keywords, title))
 	i += 1
- 
-with open(f'./{today}/selected_eng.txt', "w") as sfile:
-	for url, page in news_pages:
+
+key_eng = open(f'./data/{today}/keyword_eng.txt', "wt")
+with open(f'./data/{today}/selected_eng.txt', "wt") as sfile:
+	for url, page, keywords, title in news_pages:
 		sfile.write('url: ' + url + '\n')
 		sfile.write(page + '\n\n')
+		key_eng.write(', '.join(keywords[:3]) + '///' + title + '\n')
+key_eng.close()

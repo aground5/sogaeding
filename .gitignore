@@ -3,13 +3,18 @@ db.sqlite3
 secrets.json
 .mysqlsecrets
 .static_root
+.cache
 templates copy
 crawling/2022*/
 crawling/*.txt
 crawling/*.pickle
 crawling/test*
 crawling/tmp*
+crawling/data/*
 __pycache__/
 venv/
+crawling/.cache/
+crawling/img_scrapper/CygnusX1
 
 .DS_Store
+KoBART

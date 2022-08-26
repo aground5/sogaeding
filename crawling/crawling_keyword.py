@@ -46,7 +46,7 @@ def get_key_words(f):
 	key_word = {}
 	i = 0
 	with open(f"data/{today}/news.txt", "r") as file:
-		file_len = len(file.readlines()) // 3 + 1
+		file_len = (len(file.readlines()) - 1) // 3
 		file.seek(0)
 		for line in file.readlines():
 			line = line.strip()
@@ -61,17 +61,23 @@ def get_key_words(f):
 			kwlst = extract_keyword(' '.join(nouns), line)
 			key_word[url] = kwlst
 			f.write('url: ' + url + '\n')
-			f.write('\t'.join(kwlst) + '\n\n')
+			f.write(', '.join(kwlst) + '\n\n')
 			i += 1
 			print(f"fin {i}/{file_len}", file = sys.stderr)
+			if i > 10:
+				break
 	return key_word
 
 if __name__ == "__main__":
-	key_word_file = open(f"data/{today}/key_word.txt", "wt")
-	key_word_pickle = open(f"data/{today}/key_word.pickle", "wb")
-
-	key_word = get_key_words(key_word_file)
-	pickle.dump(key_word, key_word_pickle)
-
-	key_word_file.close()
-	key_word_pickle.close()
+	try:
+		key_word_file = open(f"data/{today}/key_word.txt", "wt")
+		key_word_pickle = open(f"data/{today}/key_word.pickle", "wb")
+	except FileNotFoundError:
+		print("file is not found")
+		raise FileNotFoundError
+	try:
+		key_word = get_key_words(key_word_file)
+		pickle.dump(key_word, key_word_pickle)
+	finally:
+		key_word_file.close()
+		key_word_pickle.close()

@@ -8,4 +8,4 @@ services:
     restart: always
     build: .
     volumes:
-      - crawl_volume:/data
+      - crawl_volume:/data:rw
