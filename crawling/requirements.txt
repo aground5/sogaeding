@@ -1,0 +1,10 @@
+./KoBART
+sklearn
+konlpy
+requests
+bs4
+sentence_transformers
+CygnusX1
+transformers
+googletrans==4.0.0-rc1
+pymysql
