@@ -46,6 +46,7 @@ with open(f"./data/{today}/summary_kor.txt", "rt") as sumfile:
 		if line[:5] == 'url: ':
 			url = line[5:]
 			continue
+		print(url)
 		cntnt_key.append((line, keyword_dict[url]))
 		dic_id = db_connected.execute(selete_cmd.format('earth_diary_diary', line))
 		
@@ -67,7 +68,7 @@ with open(f"./data/{today}/summary_eng.txt", "rt") as sumfile:
 				continue
 			if line[:5] == 'url: ':
 				url = line[5:]
-		
+				continue
 			keyti = keywordsfile.readline().strip().split('///')
 			keywords, title = keyti[0], keyti[1]
 		
