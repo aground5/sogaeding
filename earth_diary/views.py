@@ -72,5 +72,10 @@ def api_heart(request, diary_id, userid) :
             }
             return JsonResponse(data=data)
 
+def api_screenshot(request):
+    if request.method == "POST":
+        print(request.POST)
+    return JsonResponse("")
+        
 def test(request) :
     return render(request, 'test.html', {})

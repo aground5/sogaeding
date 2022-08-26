@@ -122,6 +122,13 @@
                 </ul>
               </li>
               {% if request.user.is_authenticated %}
+              <form id="screenshot_form" method="post" action="{% url 'earth_diary:screenshot' %}">
+              {% csrf_token %}
+			        <li class="nav-item my-auto ms-3 ms-lg-0">
+                <a
+                  class="btn btn-sm bg-gradient-primary mb-0 me-1 mt-2 mt-md-0" id="screenshot">스크린샷</a>
+              </li>
+              </form>
               <li class="nav-item ms-lg-auto">
                 <a class="nav-link nav-link-icon me-2" href="{% url 'common:logout' %}">
                   <i class="fa fa-sign-out me-1"></i>

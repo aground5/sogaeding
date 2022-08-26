@@ -21,5 +21,6 @@ urlpatterns = [
     path('date/<yyyy:date>/', views.bydate, name='date'),
     path('<int:diary_id>/', views.detail, name='detail'),
     path('test', views.test, name='test'),
-    path('api/heart/<int:diary_id>/<int:userid>', views.api_heart, name="heart")
+    path('api/heart/<int:diary_id>/<int:userid>', views.api_heart, name="heart"),
+    path('api/screenshot/', views.api_screenshot, name="screenshot")
 ]

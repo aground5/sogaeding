@@ -6,7 +6,10 @@ from naver_news import today
 import requests
 import re
 from img_scrapper.crawl import img_url
+import json
 
+secrets = json.loads(open('secrets.json').read())
+sql = secrets["DATABASES"]["default"]
 headers = {
 	'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
 }
@@ -21,7 +24,7 @@ def get_title(url):
 	return re.sub("\[.*?\]|〈.*?〉|.앵커.|【.*】|※.*|공동취재사진", '', title)
 
 date = datetime.datetime.now()
-db_connect = pymysql.connect(host='localhost', port=3306,user='', passwd='', charset='utf8')
+db_connect = pymysql.connect(host=sql["HOST"], port=sql["PORT"], user=sql["USER"], passwd=sql["PASSWORD"], charset='utf8')
 db_connected = db_connect.cursor()
 diary_cmd = 'INSERT INTO earth_diary_diary ({},{},{},{})'	#date, country, content, keyword
 news_cmd = 'INSERT INTO earth_diary_news ({},{},{})' #title, url, diary_id
