@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from konlpy.tag import Mecab
-import pickle
+import json
 
 from crawling_parsing import get_index_terms
 import sys
@@ -64,20 +64,18 @@ def get_key_words(f):
 			f.write(', '.join(kwlst) + '\n\n')
 			i += 1
 			print(f"fin {i}/{file_len}", file = sys.stderr)
-			if i > 10:
-				break
 	return key_word
 
 if __name__ == "__main__":
 	try:
 		key_word_file = open(f"data/{today}/key_word.txt", "wt")
-		key_word_pickle = open(f"data/{today}/key_word.pickle", "wb")
+		key_word_json = open(f"data/{today}/key_word.json", "w")
 	except FileNotFoundError:
 		print("file is not found")
 		raise FileNotFoundError
 	try:
 		key_word = get_key_words(key_word_file)
-		pickle.dump(key_word, key_word_pickle)
+		json.dump(key_word, key_word_json)
 	finally:
 		key_word_file.close()
-		key_word_pickle.close()
+		key_word_json.close()

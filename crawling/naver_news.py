@@ -1,7 +1,8 @@
+from lib2to3.pgen2.parse import ParseError
 import requests
 import re
 from bs4 import BeautifulSoup
-import pickle
+import json
 import datetime
 
 today = datetime.datetime.now().strftime("%Y%m%d")
@@ -29,6 +30,8 @@ def get_topnewspages(ranking_pages):
             raise Exception()
         tops = BeautifulSoup(response.text, 'html.parser')
         top_thumbs = tops.find_all('a', {'class' : "_es_pc_link"})
+        if not top_thumbs:
+            raise ParseError
         for i, thumb in enumerate(top_thumbs):
             top_news.append(thumb["href"])
             if i > 5:
@@ -40,6 +43,8 @@ def get_content(page):
     if response.status_code != 200:
         raise Exception()
     text = BeautifulSoup(response.text, 'html.parser')
+    if not text:
+        raise ParseError
     content = text.find('div', {'class' : "go_trans _article_content", 'id' : 'dic_area'})
     content = re.sub("\[.*?\]|〈.*?〉|.앵커.|【.*】|※.*|공동취재사진", '', str(content.get_text()).replace("\n", "").strip(), flags=re.MULTILINE)
     return content
@@ -48,7 +53,7 @@ if __name__ == "__main__":
     top_news = get_rankpages()
     news_dict = {}
     try:
-        new_pic = open(f"data/{today}/news.pickle", "wb")
+        new_pic = open(f"data/{today}/news.json", "w")
     except FileNotFoundError:
         print("file is not found")
     with open(f'data/{today}/news.txt', "w") as file:
@@ -58,6 +63,6 @@ if __name__ == "__main__":
             file.write(content + '\n\n')
             news_dict[page] = content
     try:
-        pickle.dump(news_dict, new_pic)
+        json.dump(news_dict, new_pic)
     finally:
         new_pic.close()
