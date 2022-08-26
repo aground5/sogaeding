@@ -7,7 +7,7 @@ def img_url(keyword) :
         "use_suggestions" : False,
         "max": 3
     }
-    img_src, result = scrap_google_images(args, keyword)
+    img_src, _ = scrap_google_images(args, keyword)
     return img_src
 
 print(img_url("윤석열 지지율"))
