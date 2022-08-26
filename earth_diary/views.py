@@ -70,7 +70,12 @@ def api_heart(request, diary_id, userid) :
             data = {
                 "status": "dehearted"
             }
-            return JsonResponse(data=data)
+            return HttpResponse("")
 
+def api_screenshot(request):
+    if request.method == "POST":
+        print(type(request.POST))
+    return JsonResponse("")
+        
 def test(request) :
     return render(request, 'test.html', {})

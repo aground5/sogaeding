@@ -2,7 +2,7 @@ version: '3.8'
 
 volumes:
   db_data:
-
+  crawl_volume:
 services:
   mysql:
     container_name: mysql
@@ -19,6 +19,16 @@ services:
       - db_data:/var/lib/mysql # -v 옵션 (다렉토리 마운트 설정)
     networks:
       - db_network
+  crawl:
+    container_name: crawl
+    restart: always
+    build: ./crawling
+    volumes:
+      - crawl_volume:/data:rw
+    networks:
+      - db_network
+    depends_on:
+      - mysql
   earth_diary:
     container_name: earth_diary
     restart: always
